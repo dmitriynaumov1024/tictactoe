@@ -1,0 +1,39 @@
+Tic-Tac-Toe: game model
+
+enum TicTacToeSign
+| null : null
+| zero : "o"
+| cross : "x"
+
+type TicTacToe
++ id: String 
++ size: Integer 3...5
++ grid: [[ TicTacToeSign ]] [size][size]
++ players: [{ id: String, name: String }] [2]
++ playerSigns: [ TicTacToeSign ] [2]
++ startAt: Date?
++ endAt: Date?
++ currentPlayer: Integer? // index of current player 
++ winnerPlayer: Integer? // index of winner player
++ draw: Boolean
+
+type LobbyEntry 
++ id: String
++ players: [ Player ]
+
+type Player
++ id: String
++ name: String
++ gameId: String
+
+type TicTacToe server emits
++ notification ({ text: String })
++ update ({ player: Player, lobby: [ LobbyEntry ], game: TicTacToe })
+
+type TicTacToe client emits
++ setName ({ name: String }) 
++ joinLobby ( )
++ refreshLobby ( )
++ joinGame ({ id: String }) // player id guessed from connection context
++ pingGame ({ id: String }) // player id guessed from connection context
++ putSign ({ row: Integer, column: Integer })
