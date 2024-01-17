@@ -33,8 +33,8 @@ export default {
                         player.emit("notification", { text: `Can not join ${id}: there already are 2 of 2 players.` })
                     }
                 },
-                createGame ({ player }) {
-                    let game = TicTacToe.create()
+                createGame ({ player, size }) {
+                    let game = TicTacToe.create(size)
                     let id = game.id
                     this.games.push(game)
                     let success = game.addPlayer(player) 
@@ -53,7 +53,7 @@ export default {
             },
             getLobby () {
                 return this.games.filter(game => game.players[0] == null || game.players[1] == null)
-                                 .slice(0, 10).map(game => ({ id: game.id, players: game.players }))
+                                 .slice(0, 10).map(game => ({ id: game.id, size: game.size, players: game.players }))
             },
             cleanup () {
                 let counter = 0

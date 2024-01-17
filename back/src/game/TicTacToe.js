@@ -1,11 +1,14 @@
-import { randomId, probability } from "./utils.js"
+import { randomId, probability, clamp } from "./utils.js"
 import sign from "./TicTacToeSign.js"
 
+const minBoardSize = 2,
+      maxBoardSize = 5
+
 export default {
-    create () {
-        return {
+    create (size) {
+        let result = {
             id: randomId(),
-            size: 3,
+            size: clamp(size, minBoardSize, maxBoardSize),
             grid: [],
             players: [ null, null ],
             pingAt: [ 0, 0 ],
@@ -41,6 +44,18 @@ export default {
                 if (!this.players.find(p => p.id == player.id)) {
                     return false
                 }
+                this.resetGrid()
+                this.playerSigns = probability(0.5) ?
+                    [ sign.cross, sign.zero ] :
+                    [ sign.zero, sign.cross ]
+                this.draw = false
+                this.startAt = Date.now()
+                this.endAt = null
+                this.winnerPlayer = null
+                this.currentPlayer = probability(0.5) ? 0 : 1
+                this.emitUpdate()
+            },
+            resetGrid () {
                 this.grid = []
                 for (let i=0; i<this.size; i+=1) {
                     let row = []
@@ -49,18 +64,6 @@ export default {
                         row.push(null)
                     }
                 }
-                if (probability(0.5)) {
-                    this.playerSigns = [ sign.cross, sign.zero ]
-                }
-                else {
-                    this.playerSigns = [ sign.zero, sign.cross ]
-                }
-                this.draw = false
-                this.startAt = Date.now()
-                this.endAt = null
-                this.winnerPlayer = null
-                this.currentPlayer = probability(0.5) ? 0 : 1
-                this.emitUpdate()
             },
             putSign (player, row, col) {
                 if (this.endAt != null) {
@@ -128,5 +131,7 @@ export default {
                 }
             }
         }
+        result.resetGrid()
+        return result
     }
 }

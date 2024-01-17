@@ -10,6 +10,12 @@ export function probability (p) {
     return Math.random() < p
 }
 
+export function clamp (value, min, max) {
+    if (value < min) return min
+    if (value > max) return max
+    return value
+}
+
 export function eventHandler (object) {
     object.handlers ??= { }
     object.on = function (topic, handler) {
