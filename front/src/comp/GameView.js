@@ -29,7 +29,7 @@ const GameGrid = {
     render() {
         let { size, grid } = this
         return h("div", { class: ["pad-1"] }, [
-            h("svg", { style: { display: "block", width: "100%", maxWidth: "280px", margin: "0 auto" }, viewBox: [0, 0, size * 10, size * 10].join(" ") }, [
+            h("svg", { style: { display: "block", maxWidth: "100%", width: Math.min(size*75, 360)+"px", margin: "0 auto" }, viewBox: [0, 0, size * 10, size * 10].join(" ") }, [
                 grid.map((row, i) => row.map((cell, j) => {
                     return icons[cell]({ row: i, col: j, onClick: ()=> this.$emit("putSign", i, j) })
                 })),
