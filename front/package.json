@@ -1,0 +1,19 @@
+{
+    "name": "tictactoe-frontend",
+    "version": "0.0.1",
+    "author": "Dmitriy Naumov",
+    "type": "module",
+    "private": true,
+    "scripts": {
+        "dev": "vite --port 5000 --host",
+        "build": "vite build"
+    },
+    "dependencies": {
+        "vue": "^3.2.47",
+        "vue-router": "^4.1.6"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-vue": "^3.0.3",
+        "vite": "^3.0.9"
+    }
+}

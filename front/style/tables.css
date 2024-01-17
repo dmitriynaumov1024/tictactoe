@@ -1,0 +1,73 @@
+/* key-value table */
+table.kvtable, 
+table.kntable {
+  display: block;
+}
+
+table.kvtable tr, 
+table.kntable tr {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 0.25rem 0rem;
+}
+
+table.kvtable tr>td {
+  display: inline-block;
+  width: 100%;
+  padding: 0rem 0.5rem;
+  white-space: pre-wrap;
+}
+
+table.kntable tr>td {
+  padding: 0 2px;
+  display: inline-block;
+}
+
+table.kntable tr>td:nth-child(1) {
+  width: 60%;
+}
+
+table.kntable tr>td:nth-child(2) {
+  width: 40%;
+}
+
+table.kntable[align-right] tr>td:nth-child(2),
+table.kntable.align-right tr>td:nth-child(2) {
+  text-align: right;
+}
+
+@media screen and (max-width: 479px) {
+  table.kvtable tr>td:first-child {
+    font-size: 0.875rem;
+  }
+}
+
+@media screen and (min-width: 490px) {
+  table.kvtable tr {
+    padding: 0;
+  }
+  table.kvtable tr>td {
+    padding: 0.75rem 0.5rem;
+  }
+  table.kvtable tr>td:nth-child(1) {
+    width: 40%;
+  }
+  table.kvtable tr>td:nth-child(2) {
+    width: 60%;
+  }
+}
+
+table.stripes tr:nth-child(2n-1) {
+  background-color: var(--color-back-0);  
+}
+
+table.stripes tr:nth-child(2n) {
+  background-color: var(--color-back-1);
+}
+
+@media screen and (min-width: 490px) {
+  table.kvtable.stripes tr>td:nth-child(1) {
+    border-right: 2px solid var(--color-back-2);
+  }
+}

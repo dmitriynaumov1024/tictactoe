@@ -1,0 +1,126 @@
+/* text things */
+body {
+  font-family: Arimo, Arial, "Droid Sans", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-fore-0);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a.link {
+  color: var(--color-accent);
+}
+
+*::selection {
+  background-color: var(--color-shadow);
+}
+
+h1 {
+  font-size: 1.75rem;
+}
+
+h2 {
+  font-size: 1.50rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+h4, h5, h6 {
+  font-size: 1rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  color: var(--color-fore-0);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-end, .text-right {
+  text-align: right;
+}
+
+.text-huge, .text-175, .text-h1 {
+  font-size: 1.75rem;
+}
+
+.text-large, .text-150, .text-h2 {
+  font-size: 1.5rem;
+}
+
+.text-bigger, .text-125, .text-h3 {
+  font-size: 1.25rem;
+}
+
+.text-small, .text-075 {
+  font-size: 0.75rem;
+}
+
+.text-tiny, .text-05 {
+  font-size: 0.5rem;
+}
+
+.text-thin.text-thin {
+  font-weight: normal;
+}
+
+.text-info {
+  color: var(--color-fore-1);
+}
+
+.text-strong.text-strong {
+  color: var(--color-fore-0);
+}
+
+.text-warn {
+  color: var(--color-warn);
+}
+
+.text-bad, .text-error {
+  color: var(--color-error);
+}
+
+.text-success {
+  color: var(--color-success);
+}
+
+.text-gray {
+  color: var(--color-gray);
+}
+
+.text-weak {
+  color: var(--color-border);
+}
+
+.text-accent {
+  color: var(--color-accent);
+}
+
+.text-pre {
+  white-space: pre;
+}
+
+.text-pre-wrap {
+  white-space: pre-wrap;
+}
+
+.text-bold.text-bold {
+  font-weight: bold;
+}
+
+.text-code.text-code,
+.text-mono.text-mono {
+  font-family: "Noto mono", "Consolas", monospace;
+  white-space: pre;
+}

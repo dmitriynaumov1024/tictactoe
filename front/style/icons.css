@@ -1,0 +1,17 @@
+/* icon sizes */
+.icon-1 {
+  height: 1rem;
+}
+
+.icon-15 {
+  height: 1.5rem;
+}
+
+.icon-2 {
+  height: 2rem;
+}
+
+.icon-1, .icon-15, .icon-2 {
+  display: block;
+  vertical-align: text-top;
+}

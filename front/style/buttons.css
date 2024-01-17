@@ -1,0 +1,78 @@
+.button {
+  appearance: none;
+  font: inherit;
+  line-height: inherit;
+  padding: 0;
+  outline: none;
+  text-decoration: none;
+  border: unset;
+  border-radius: 0;
+  user-select: none;
+  cursor: pointer;
+  text-align: center;
+}
+
+.button-1, .button-2 {
+  padding: 0.25rem 0.5rem;
+  font-weight: bold;
+  border: 2px solid var(--color-accent);
+  transition-duration: 0.2s;
+}
+
+@media screen and (min-width: 490px) {
+  .button-1, .button-2 {
+    padding: 0.25rem 0.75rem;
+  }
+}
+
+.button-1 {
+  color: var(--color-back-0);
+  background-color: var(--color-accent);
+}
+
+.button-1:hover, .button-2:hover {
+  opacity: 80%;
+}
+
+.button-1:active, .button-2:active {
+  opacity: 100%;
+}
+
+.button-2 {
+  color: var(--color-accent);
+  background-color: transparent;
+}
+
+.button-2:hover, .button-2:active  {
+  background-color: var(--color-back-1);
+}
+
+.button-inline, .link, .top-navbar-link {
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--color-accent);
+  background-color: transparent;
+  transition-duration: 0.2s;
+}
+
+.top-navbar-link.top-navbar-link {
+  color: var(--color-fore-0);
+}
+
+.button-inline:hover, .link:hover {
+  opacity: 80%;
+}
+
+.button-inline:active, .link:active {
+  opacity: 100%;
+}
+
+.button-block {
+  display: block;
+  width: 100%;
+}
+
+button.disabled, button[disabled] {
+  opacity: 25%;
+  pointer-events: none;
+}

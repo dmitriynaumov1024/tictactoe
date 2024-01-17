@@ -1,0 +1,145 @@
+.container-1 {
+  width: 300px;
+  max-width: 100%;
+  margin: auto;
+}
+
+.width-container {
+  width: 360px;
+  max-width: 100%;
+  margin: auto;
+}
+
+@media screen and (min-width: 490px) {
+  .width-container {
+    width: 480px;
+  }
+}
+
+@media screen and (min-width: 760px) {
+  .width-container {
+    width: 720px;
+  }
+}
+
+@media screen and (min-width: 2000px) {
+  .width-container {
+    width: 1080px;
+  }
+}
+
+.card, .card-high {
+  display: block;
+  border-bottom: var(--border);
+}
+
+.card-card {
+  display: block;
+  background-color: var(--color-back-0);
+  border: var(--border);
+}
+
+.card-card.selected {
+  border-color: var(--color-accent);
+}
+
+@media screen and (min-width: 490px) 
+{
+  .card-high {
+    background-color: var(--color-back-0);
+    border: var(--border);
+    box-shadow: var(--shadow);
+  }
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.flex-stripe {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-gallery {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-gallery {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.border-bottom {
+  border-bottom: var(--border);
+}
+
+.border-left {
+  border-left: var(--border);
+}
+
+.border-left-2 {
+  border-left: var(--border);
+  border-left-width: 4px; 
+  padding-left: 4px;
+}
+
+.default-pagination {
+  min-height: 50vh;
+}
+
+.modal-wrapper {
+  display: block;
+  position: fixed;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  padding-top: 4rem;
+  background-color: rgba(0, 0, 0, 0.07);
+}
+
+@media screen and (min-width: 760px) {
+  .modal-wrapper {
+    padding-top: 7rem;
+  }
+}
+
+.modal-window {
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
+}
+
+@media screen and (min-width: 460px) {
+  .modal-wrapper .width-container {
+    max-width: 460px;
+  }
+}
+
+.scroll {
+  overflow: scroll;
+}
+
+.log-output {
+  height: 20rem;
+  overflow-y: scroll;
+}

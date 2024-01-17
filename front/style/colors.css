@@ -1,0 +1,71 @@
+body {
+  --color-fore-0: #121212;
+  --color-fore-1: #303030;
+  --color-fore-2: #565656;
+  --color-fore-3: #737373;
+
+  --color-back-0: #fefefe;
+  --color-back-1: #f9f9fa;
+  --color-back-2: #f1f1f2;
+  --color-back-3: #e7e7e9;
+
+  --color-accent: #3344cc;
+
+  --color-gray: #949699;
+  --color-good: #48de69;
+  --color-success: var(--coolor-good);
+  --color-warn: #fbe810;
+  --color-bad: #de4547;
+  --color-error: var(--color-bad);
+  --color-border: #d9dbdd;
+  --color-shadow: rgba(19,20,34,0.19);
+
+  --border: 2px solid var(--color-border);
+
+  --shadow: 6px 6px var(--color-shadow);
+  --shadow-b: 0 6px var(--color-shadow);
+}
+
+body[theme="dark"] {
+
+  --color-back-0: #58595a;
+  --color-back-1: #4e4f50;
+  --color-back-2: #444546;
+  --color-back-3: #353638;
+
+  --color-fore-0: #e0e1e3;
+  --color-fore-1: #d7d8da;
+  --color-fore-2: #d0d1d3;
+  --color-fore-3: #c7c8ca;
+
+  --color-gray: #808080;
+
+  --color-accent: #4048ee;
+
+  --color-border: rgba(10,13,19,0.25);
+  --color-shadow: rgba(10,13,19,0.26);
+}
+
+.accent-good.accent-good {
+  --color-accent: var(--color-good);
+}
+
+.accent-warn.accent-warn {
+  --color-accent: var(--color-warn);
+}
+
+.accent-bad.accent-bad {
+  --color-accent: var(--color-bad);
+}
+
+.accent-error.accent-error {
+  --color-accent: var(--color-error);
+}
+
+.accent-gray.accent-gray {
+  --color-accent: var(--color-gray);
+}
+
+.accent-weak.accent-weak {
+  --color-accent: var(--color-border);
+}
