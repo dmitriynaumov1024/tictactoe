@@ -1,0 +1,15 @@
+{
+    "name": "tictactoe-backend",
+    "version": "0.0.1",
+    "author": "Dmitriy Naumov",
+    "type": "module",
+    "private": true,
+    "scripts": {
+        "serve": "node ./src/main.js",
+        "fiddle": "node ./src/fiddle.js"
+    },
+    "dependencies": {
+        "express": "^4.18.2",
+        "ws": "^8.16.0"
+    }
+}
