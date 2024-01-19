@@ -239,3 +239,20 @@ img.fabric-card-thumbnail + .fabric-card-overlay {
 .width-6 {
   width: 6rem;
 }
+
+/* min width */
+.min-width-1 {
+  min-width: 1rem;
+}
+
+.min-width-2 {
+  min-width: 2rem;
+}
+
+.min-width-4 {
+  min-width: 4rem;
+}
+
+.min-width-6 {
+  min-width: 6rem;
+}

@@ -16,7 +16,7 @@
   padding: 0.25rem 0.75rem;
   font-weight: bold;
   border: 2px solid var(--color-accent);
-  transition-duration: 0.2s;
+  transition-duration: color 0.2s, background-color 0.2s, border-color 0.2s;
 }
 
 @media screen and (min-width: 490px) {

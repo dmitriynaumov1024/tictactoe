@@ -59,24 +59,26 @@ export default {
         }
     },
     render() {
-        let player = this.clientData.player
-        let opponent = this.clientData.game.players.find(p => p?.id != player.id)
-        let game = this.clientData.game
+        let { player, game, time } = this.clientData
+        let standalone = (game.players[0]?.id == game.players[1]?.id) && game.players[0] != null
+        let opponent = game.players.find(p => p?.id != player.id)
         let isMyTurn = game.players[game.currentPlayer]?.id == player.id
         let currentSign = game.playerSigns[game.currentPlayer]
-        let elapsedTime = this.clientData.time - (game.startAt ?? this.clientData.time) 
+        let winnerSign = game.winnerSign
+        let elapsedTime = time - (game.startAt ?? time) 
         return [
             h("div", { class: ["card-card", "pad-05", "mar-b-05"] }, [
+                h("p", { class: ["mar-b-05", "text-bold"] }, game.id? `${game.size}x${game.size} Game with id ${game.id}` : `Standalone Game`),
                 h("p", { class: ["mar-b-05"] }, `Playing as: ${player.name} with id ${player.id}`),
                 h("p", { class: ["mar-b-05"] }, opponent? `Opponent: ${opponent.name} with id ${opponent.id}` : "All by yourself"),
                 (game.currentPlayer!=null)? h("p", { class: ["mar-b-05"] }, `${isMyTurn? "This is your turn " : "This is your opponent's turn "} (${currentSign})`) : null,
-                game.draw? h("p", { class: ["mar-b-05", "text-bold"] }, "That is a draw!") :
-                (game.winnerPlayer!=null)? h("p", { class: ["mar-b-05", "text-bold"] }, `Winner: ${game.players[game.winnerPlayer]?.name ?? "Someone who disconnected really quick"} with id ${game.players[game.winnerPlayer]?.id ?? "that is a secret"}`) : null,
+                (game.draw)? h("p", { class: ["mar-b-05", "text-bold"] }, "That is a draw!") :
+                (game.winnerPlayer!=null)? h("p", { class: ["mar-b-05", "text-bold"] }, standalone? `Winner sign: (${winnerSign})` : `Winner: ${game.players[game.winnerPlayer]?.name ?? "Someone who disconnected really quick"} (${game.winnerSign ?? "???"}) with id ${game.players[game.winnerPlayer]?.id ?? "(???)"}`) : null,
                 (game.grid?.length > 0)? h(GameGrid, { size: game.size, grid: game.grid, onPutSign: (row, col)=> this.putSign(row, col) }) : h("div", { style: { height: "240px" } }, " "),
                 (game.currentPlayer == null)? 
-                opponent? 
+                (standalone || opponent)? 
                     h("button", { class: ["button", "button-1", "button-block", "pad-1"], onClick: ()=> this.resetGame() }, "Play / Restart") : 
-                    h("p", { class: ["text-center"] }, "Waiting for opponent...") :
+                    h("p", { class: ["text-center", "mar-b-05"] }, "Waiting for opponent...") :
                 h("p", { class: ["mar-b-05", "text-center"] }, [
                     h("span", { style: { "display": "inline-block", "min-width": "7rem", "margin-right": "0.5rem" } }, "Elapsed time:"), 
                     h("span", { style: { "display": "inline-block", "min-width": "5rem" } }, `${(elapsedTime / 60000) | 0}m ${((elapsedTime / 1000) | 0) % 60}s`)

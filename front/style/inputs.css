@@ -18,7 +18,7 @@ input {
   padding: 0.25rem 0.375rem;
   outline: none;
   border-radius: 0;
-  border: 2px solid var(--color-back-2);
+  border: 2px solid var(--color-border);
   line-height: inherit;
   font-family: inherit;
   color: inherit;
@@ -60,7 +60,7 @@ input[type="checkbox"]:checked+label {
 .fancy-radiobox-button {
   display: inline-block; 
   height: 1.5rem; 
-  border: 2px solid var(--color-back-3); 
+  border: 2px solid var(--color-border); 
   margin-right: 0.5rem;
   background-color: var(--color-back-0);
   /*border-radius: 2px;*/
