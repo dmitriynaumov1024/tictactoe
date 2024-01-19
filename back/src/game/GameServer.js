@@ -33,15 +33,14 @@ export default {
                         player.emit("notification", { text: `Can not join ${id}: there already are 2 of 2 players.` })
                     }
                 },
-                createGame ({ player, size }) {
-                    let game = TicTacToe.create(size)
+                createGame ({ player, size, standalone }) {
+                    let game = TicTacToe.create({ size, standalone })
                     let id = game.id
                     this.games.push(game)
                     let success = game.addPlayer(player) 
                     if (success) {
                         player.gameId = id
                         player.emit("notification", { text: `You created game ${id}.` })
-                        player.emit("update", { player: player, game: game })
                     }
                     else {
                         player.emit("notification", { text: `Can not create game. Something went wrong.` })
@@ -52,8 +51,8 @@ export default {
                 return this.games.find(game => game.id == player.gameId)
             },
             getLobby () {
-                return this.games.filter(game => game.players[0] == null || game.players[1] == null)
-                                 .slice(0, 10).map(game => ({ id: game.id, size: game.size, players: game.players }))
+                return this.games.filter(game => (game.standalone == false) && (game.players[0] == null || game.players[1] == null))
+                                 .slice(0, 30).map(game => ({ id: game.id, size: game.size, players: game.players }))
             },
             cleanup () {
                 let counter = 0
@@ -61,7 +60,7 @@ export default {
                 let gameTTL = 600 * 1000 // 10 mins
                 for (let game of this.games) {
                     let timeMargin = (game.players[0] || game.players[1])? (Date.now() - gameTTL*2) : (Date.now() - gameTTL)
-                    if (game.pingAt[0]>timeMargin || game.pingAt[1]>timeMargin) {
+                    if (game.createdAt > timeMargin || game.pingAt[0]>timeMargin || game.pingAt[1]>timeMargin) {
                         healthyGames.push(game)
                     }
                     else {

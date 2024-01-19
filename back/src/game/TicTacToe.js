@@ -1,24 +1,37 @@
 import { randomId, probability, clamp } from "./utils.js"
 import sign from "./TicTacToeSign.js"
 
-const minBoardSize = 2,
-      maxBoardSize = 5
+const boardSize = {
+    min: 2,
+    default: 3,
+    max: 5
+}
 
 export default {
-    create (size) {
+    create ({ size, standalone = false }) {
         let result = {
             id: randomId(),
-            size: clamp(size, minBoardSize, maxBoardSize),
+            size: clamp(size ?? boardSize.default, boardSize.min, boardSize.max),
+            standalone: standalone,
             grid: [],
             players: [ null, null ],
             pingAt: [ 0, 0 ],
             playerSigns: [ null, null ],
+            createdAt: Date.now(),
             startAt: null,
             elapsedTime: null,
             endAt: null,
             currentPlayer: null,
             winnerPlayer: null,
+            winnerSign: null,
             addPlayer (player) {
+                if (this.standalone && this.players[0] == null) {
+                    this.players[0] = player
+                    this.players[1] = player
+                    this.pingAt[0] = Date.now()
+                    this.emitUpdate()
+                    return true
+                }
                 for (let i of [0, 1]) {
                     if (this.players[i] == null) {
                         this.players[i] = player
@@ -30,15 +43,16 @@ export default {
                 return false
             },
             removePlayer (player) {
+                let removed = false
                 for (let i of [0, 1]) {
                     if (this.players[i]?.id == player?.id) {
                         this.players[i] = null
+                        removed = true
                         if (this.winnerPlayer == i) this.winnerPlayer = -1
-                        this.emitUpdate()
-                        return true
                     }
                 }
-                return false
+                if (removed) this.emitUpdate()
+                return removed
             },
             reset (player) {
                 if (!this.players.find(p => p.id == player.id)) {
@@ -66,21 +80,19 @@ export default {
                 }
             },
             putSign (player, row, col) {
-                if (this.endAt != null) {
-                    return false
+                let canPutSign = 
+                    (this.endAt == null) &&
+                    (this.grid[row][col] == null) &&
+                    (this.currentPlayer != null) &&
+                    (this.standalone || (this.players.findIndex(p => p.id == player.id) == this.currentPlayer))
+
+                if (canPutSign) {
+                    this.grid[row][col] = this.playerSigns[this.currentPlayer]
+                    this.currentPlayer = (this.currentPlayer == 1)? 0 : 1
+                    this.pingAt[this.currentPlayer] = Date.now()
+                    this.checkWin()
+                    this.emitUpdate()
                 }
-                let index = this.players.findIndex(p => p.id == player.id)
-                if (index != this.currentPlayer) {
-                    return false
-                }
-                if (this.grid[row][col] != null) {
-                    return false
-                }
-                this.grid[row][col] = this.playerSigns[index]
-                this.currentPlayer = (this.currentPlayer == 1)? 0 : 1
-                this.pingAt[index] = Date.now()
-                this.checkWin()
-                this.emitUpdate()
             },
             checkWin () {
                 let emptyCells = 0
@@ -110,6 +122,7 @@ export default {
                                 // console.log({ counter, i })
                                 this.winnerPlayer = k
                                 this.currentPlayer = null
+                                this.winnerSign = currentsign
                                 this.endAt = Date.now()
                                 return
                             }

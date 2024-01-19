@@ -25,8 +25,8 @@ export default {
                 joinGame (id) {
                     server.handle("joinGame", { player: this, id: id })
                 },
-                createGame ({ size }) {
-                    server.handle("createGame", { player: this, size: size })
+                createGame ({ size, standalone }) {
+                    server.handle("createGame", { player: this, size: size, standalone: standalone })
                 },
                 pingGame (id) {
                     this.pingAt = Date.now()
